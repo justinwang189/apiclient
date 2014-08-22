@@ -25,8 +25,6 @@ abstract class Client(cred: OauthCred) {
 
   def release = client.release()
 
-  //def makeRequest(request: ApiRequest): ApiRequest
-
 }
 
 class OauthSigner(cred: OauthCred = Example.defaultOauth) {
@@ -50,27 +48,6 @@ object Example {
 
   )
 }
-
-/*
-twitterClient.
-  makeHomeTimelineRequest().withCount(10).excludeReplies().send(): Future[Timeline]
-  sendHomeTimelineRequest(): Future[Timeline]
-
-
-timeline.head.user.makeUserTimelineRequest
-
-trait withClient
-  .
-
-class TwitterClient {
-  val client;
-  makeHometimelineRequset = new HometimelineRequest(client: Client)
-  sendHometimelineRequest = new HometimelineRequest(client: Client) send
-}
-
- */
-
-
 
 case class OauthCred (
   consumerKey: String,
