@@ -1,10 +1,17 @@
 package apiclient.twitter.model
 
-class Tweet(text: String) {
-  override def toString = "Tweet( text = " + text + ")"
-}
+import apiclient.twitter._
 
-class Timeline(tweets: Seq[Tweet]) {
-  override def toString = "Timeline(" + tweets.map { _.toString }.mkString(", ") + ")"
+case class Tweet(
+  id: TweetId,
+  text: String,
+  user: User,
+  inReplyToUserId: Option[UserId],
+  favoriteCount: Long,
+  retweetCount: Long,
+  source: Option[String]
+)
 
-}
+case class Timeline(
+ tweets: Seq[Tweet]
+)

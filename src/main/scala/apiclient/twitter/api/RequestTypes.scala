@@ -9,6 +9,8 @@ trait TimelineRequest extends ApiRequest {
 }
 
 trait TweetRequest extends ApiRequest {
+
   type Self <: TweetRequest
   def withTweetId(tweetId: Long): Self = addParam("id", tweetId.toString )
+
 }
