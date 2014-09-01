@@ -12,6 +12,4 @@ case class Tweet(
   source: Option[String]
 )
 
-case class Timeline(
- tweets: Seq[Tweet]
-)
+

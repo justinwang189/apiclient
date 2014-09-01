@@ -28,7 +28,7 @@ case class ParseTweet(
 case class ParseUser (
   id_str: String,
   name: Option[String],
-  screen_name: String,
+  screen_name: Option[String],
   location: String,
   description: Option[String],
   url: Option[String],
@@ -43,7 +43,7 @@ case class ParseUser (
     new User(
       id = id_str.toLong,
       name = name,
-      screenName = screen_name,
+      screenName = screen_name.getOrElse(""),
       description = description,
       url = url,
       followerCount = followers_count,
@@ -54,6 +54,14 @@ case class ParseUser (
       language = lang
     )
   }
+}
+
+case class ParseUserList(
+  users: Seq[ParseUser],
+  previous_cursor_str: String,
+  next_cursor: String
+)  {
+  def toModel: UserList = UserList(users.map { _.toModel })
 }
 
 case class ParseTimeline(

@@ -11,9 +11,21 @@ class TwitterClient(cred: OauthCred) extends Client(cred) { self =>
 
   def sendHomeTimelineRequest() = makeHomeTimelineRequest().sendRequest()
 
-  def makeShowStatusRequest(tweetId: Long) = new ShowStatusRequest(tweetId).withClient(self)
+  def makeShowStatusRequest(tweetId: TweetId) = new ShowStatusRequest(tweetId).withClient(self)
 
-  def sendShowStatusRequest(tweetId: Long): Future[Tweet] = makeShowStatusRequest(tweetId).sendRequest()
+  def sendShowStatusRequest(tweetId: TweetId): Future[Tweet] = makeShowStatusRequest(tweetId).sendRequest()
+
+  def makeUserTimelineRequest(userId: UserId) = new UserTimelineRequest(userId).withClient(self)
+
+  def sendUserTimelineRequest(userId: UserId): Future[Timeline] = makeUserTimelineRequest(userId).sendRequest()
+
+  def makeFollowerListRequest(userId: UserId) = new FollowerListRequest(userId).withClient(self)
+
+  def sendFollowerListRequest(userId: UserId): Future[UserList] = makeFollowerListRequest(userId).sendRequest()
+
+  def makeUserLookupRequest(userId: UserId) = new UserLookupRequest(userId).withClient(self)
+
+  def sendUserLookupRequest(userId: UserId): Future[User] = makeUserLookupRequest(userId).sendRequest()
 
 
 }
