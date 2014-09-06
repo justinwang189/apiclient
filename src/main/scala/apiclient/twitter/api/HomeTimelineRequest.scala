@@ -5,17 +5,27 @@ import apiclient.twitter.model._
 import com.twitter.util.Future
 
 
-class HomeTimelineRequest(
-  override val params: Map[String, String] = Map()
-) extends TimelineRequest {
+class HomeTimelineRequest[C <: HasClient](
+  val params: Map[String, String] = Map(),
+  val client: Option[Client] = None
+)
+  extends ApiRequest[C, Timeline]
+  with TimelineParser
+{
 
-  type Self <: HomeTimelineRequest
+  type Self = HomeTimelineRequest[C]
 
   override val endpoint = "/1.1/statuses/home_timeline.json"
-  override def update(params: Map[String, String]) = new HomeTimelineRequest(params).asInstanceOf[Self]
-  def withClient(client: Client) = new HomeTimelineRequestBuilt(params, client)
+
+  override def update(params: Map[String, String]) = new HomeTimelineRequest[C](params).asInstanceOf[Self]
+  def withClient(client: Client) = new HomeTimelineRequest[WithClient](params, Some(client))
 
 }
+
+object HomeTimelineRequest {
+  def apply() = new HomeTimelineRequest[NoClient]
+}
+/*
 
 class HomeTimelineRequestBuilt(override val params: Map[String, String], val client: Client)
   extends HomeTimelineRequest
@@ -28,4 +38,5 @@ class HomeTimelineRequestBuilt(override val params: Map[String, String], val cli
   override def update(newParams: Map[String, String]) = new HomeTimelineRequestBuilt(newParams, client)
 
 }
+*/
 

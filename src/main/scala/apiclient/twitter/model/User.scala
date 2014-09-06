@@ -15,4 +15,4 @@ case class User (
   tweetCount: Long,
   mediaCount: Long,
   language: String
-)
+) extends TwitterModel

@@ -5,6 +5,7 @@ import apiclient.twitter.model.Timeline
 import com.twitter.util.Future
 import apiclient.twitter._
 
+/*
 class UserTimelineRequest(
   userId: UserId,
   p: Map[String, String] = Map()
@@ -31,3 +32,4 @@ class UserTimelineRequestBuilt(userId: UserId, override val params: Map[String, 
   override def update(newParams: Map[String, String]) = new UserTimelineRequestBuilt(userId, newParams, client)
 
 }
+*/

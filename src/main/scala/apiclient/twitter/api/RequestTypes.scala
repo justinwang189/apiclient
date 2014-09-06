@@ -3,8 +3,10 @@ package apiclient.twitter.api
 import apiclient.common.ApiRequest
 import apiclient.twitter._
 
-trait TimelineRequest extends ApiRequest {
-  type Self <: TimelineRequest
+
+/*
+trait TimelineRequest[C, R] extends ApiRequest[C, R] {
+  type Self <: TimelineRequest[C, R]
   def withCount(count: Int): Self = addParam("count", count.toString)
   def excludeReplies(): Self = addParam("exclude_replies", "true")
   def excludeRetweets(): Self = addParam("include_rts", "false")
@@ -18,6 +20,9 @@ trait TweetRequest extends ApiRequest {
   def withTweetId(tweetId: Long): Self = addParam("id", tweetId.toString )
 }
 
+
+
 trait ListRequest extends ApiRequest {
   type self <: ListRequest
 }
+*/

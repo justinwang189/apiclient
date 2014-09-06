@@ -10,6 +10,4 @@ case class Tweet(
   favoriteCount: Long,
   retweetCount: Long,
   source: Option[String]
-)
-
-
+) extends TwitterModel

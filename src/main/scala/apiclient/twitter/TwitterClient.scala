@@ -2,15 +2,18 @@ package apiclient.twitter
 
 import apiclient.common._
 import apiclient.twitter.api._
+import apiclient.twitter.model._
 import com.twitter.util._
 import apiclient.twitter.model._
+
 
 class TwitterClient(cred: OauthCred) extends Client(cred) { self =>
 
   def makeHomeTimelineRequest() = new HomeTimelineRequest().withClient(self)
 
-  def sendHomeTimelineRequest() = makeHomeTimelineRequest().sendRequest()
+  def sendHomeTimelineRequest() = makeHomeTimelineRequest().sendRequest
 
+  /*
   def makeShowStatusRequest(tweetId: TweetId) = new ShowStatusRequest(tweetId).withClient(self)
 
   def sendShowStatusRequest(tweetId: TweetId): Future[Tweet] = makeShowStatusRequest(tweetId).sendRequest()
@@ -26,6 +29,7 @@ class TwitterClient(cred: OauthCred) extends Client(cred) { self =>
   def makeUserLookupRequest(userId: UserId) = new UserLookupRequest(userId).withClient(self)
 
   def sendUserLookupRequest(userId: UserId): Future[User] = makeUserLookupRequest(userId).sendRequest()
+  */
 
 
 }

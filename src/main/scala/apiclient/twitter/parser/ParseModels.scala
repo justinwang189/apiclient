@@ -2,6 +2,10 @@ package apiclient.twitter.parser
 
 import apiclient.twitter.model._
 
+trait ParseModel[M] {
+  def toModel: M
+}
+
 case class ParseTweet(
   id_str: String,
   text: String,
@@ -11,8 +15,8 @@ case class ParseTweet(
   retweet_count: Long,
   in_reply_to_screen_name: Option[String],
   source: Option[String]
-) {
-  def toModel = {
+) extends ParseModel[Tweet] {
+  override def toModel = {
     new Tweet(
       id = id_str.toLong,
       text = text,
@@ -38,8 +42,8 @@ case class ParseUser (
   statuses_count: Long,
   media_count: Option[Long],
   lang: String
-) {
-  def toModel = {
+) extends ParseModel[User] {
+  override def toModel = {
     new User(
       id = id_str.toLong,
       name = name,
@@ -60,12 +64,12 @@ case class ParseUserList(
   users: Seq[ParseUser],
   previous_cursor_str: String,
   next_cursor: String
-)  {
+)  extends ParseModel[UserList] {
   def toModel: UserList = UserList(users.map { _.toModel })
 }
 
 case class ParseTimeline(
   tweets: Seq[ParseTweet] = Seq.empty
-) {
-  def toModel = new Timeline(tweets.map { _.toModel })
+) extends ParseModel[Timeline]{
+  override def toModel = new Timeline(tweets.map { _.toModel })
 }

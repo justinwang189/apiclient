@@ -5,6 +5,7 @@ import apiclient.twitter.model._
 import com.twitter.util.Future
 import apiclient.twitter._
 
+/*
 class FollowerListRequest(
   userId: UserId,
   p: Map[String, String] = Map()
@@ -31,3 +32,4 @@ class FollowerListRequestBuilt(userId: UserId, override val params: Map[String, 
   override def update(newParams: Map[String, String]) = new FollowerListRequestBuilt(userId, newParams, client)
 
 }
+*/

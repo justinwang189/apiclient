@@ -5,6 +5,7 @@ import apiclient.twitter.model._
 import com.twitter.util.Future
 import apiclient.twitter._
 
+/*
 class UserLookupRequest(
   userId: UserId,
   p: Map[String, String] = Map()
@@ -30,3 +31,4 @@ class UserLookupRequestBuilt(userId: UserId, override val params: Map[String, St
   override def sendRequest(): Future[User] = client(this.fullUrl).getFuture[String]()
   override def update(newParams: Map[String, String]) = new UserLookupRequestBuilt(userId, newParams, client)
 }
+*/
