@@ -4,20 +4,23 @@ import com.foursquare.fhttp.FHttpClient
 import com.twitter.util._
 import apiclient.twitter.api.Parser
 
-abstract class ApiRequest[C <: HasClient, M <: Model] { self: ApiRequest[C,M] with Parser[M]=>
+
+trait HasClient
+trait WithClient extends HasClient
+trait NoClient extends HasClient
+
+abstract class ApiRequest[C <: HasClient, M <: Model] { self: Parser[M]=>
 
   type Self <: ApiRequest[C, M]
 
   val endpoint: String
   val params: Map[String, String]
   val client: Option[Client]
-  //def parser: Parser[M]
 
   protected def addParam(key: String, value: String): Self = update(params ++ Map(key -> value))
   protected def update(newParams: Map[String, String]): Self
 
-  //def sendRequest(implicit evidence: Future[String] => Future[M]): Future[M] =  {
-  def sendRequest(): Future[M] =  {
+  def sendRequest(implicit ev: C =:= WithClient): Future[M] =  {
     client.get.apply(fullUrl).getFuture[String]().map { parseModel }
   }
 
@@ -29,15 +32,3 @@ abstract class ApiRequest[C <: HasClient, M <: Model] { self: ApiRequest[C,M] wi
   }
 
 }
-
-trait HasClient
-
-trait WithClient extends HasClient
-trait NoClient extends HasClient
-
-/*
-trait hasClient[T] {
-  def client: Client
-  def sendRequest(): Future[T]
-}
-*/
