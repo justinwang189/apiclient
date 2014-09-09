@@ -5,6 +5,8 @@ import apiclient.twitter.model._
 import com.twitter.util.Future
 
 
+
+/*
 class ShowStatusRequest[C <: HasClient](
   val params: Map[String, String] = Map(),
   val client: Option[Client] = None
@@ -14,10 +16,11 @@ class ShowStatusRequest[C <: HasClient](
 {
   type Self = ShowStatusRequest[C]
   override val endpoint = "/1.1/statuses/show.json"
-  override def update(params: Map[String, String]) = new ShowStatusRequest[C](params, client).asInstanceOf[Self]
-  def withClient(client: Client) = new ShowStatusRequest[WithClient](params, Some(client))
+  override def update[D <: HasClient](params: Map[String, String], client: Option[Client] = client) = new ShowStatusRequest[D](params, client).asInstanceOf[Self]
+  //def withClient(client: Client) = new ShowStatusRequest[WithClient](params, Some(client))
 }
 
 object ShowStatusRequest {
   def apply(tweetId: Long) = new ShowStatusRequest[NoClient].withTweetId(tweetId)
 }
+*/

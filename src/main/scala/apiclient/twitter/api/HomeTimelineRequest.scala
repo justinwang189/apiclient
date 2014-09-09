@@ -8,13 +8,14 @@ class HomeTimelineRequest[C <: HasClient](
   val params: Map[String, String] = Map(),
   val client: Option[Client] = None
 )
-  extends TimelineRequest[C, Timeline]
+  extends ApiRequest[C, Timeline]
   with TimelineParser
+  with TimelineRequestOptions[C]
 {
-  type Self = HomeTimelineRequest[C]
+  type Self[D <: HasClient] = HomeTimelineRequest[D]
   override val endpoint = "/1.1/statuses/home_timeline.json"
-  override def update(params: Map[String, String]) = new HomeTimelineRequest[C](params, client).asInstanceOf[Self]
-  def withClient(client: Client) = new HomeTimelineRequest[WithClient](params, Some(client))
+  override def update[D <: HasClient](params: Map[String, String], client: Option[Client] = client) = new HomeTimelineRequest[D](params, client)
+  //def withClient(client: Client) = new HomeTimelineRequest[WithClient](params, Some(client))
 }
 
 object HomeTimelineRequest {

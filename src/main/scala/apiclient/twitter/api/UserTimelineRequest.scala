@@ -8,6 +8,7 @@ import scala.Some
 import apiclient.twitter.model.Timeline
 
 
+/*
 class UserTimelineRequest[C <: HasClient](
   val params: Map[String, String] = Map(),
   val client: Option[Client] = None
@@ -17,13 +18,15 @@ class UserTimelineRequest[C <: HasClient](
 {
   type Self = UserTimelineRequest[C]
   override val endpoint = "/1.1/statuses/user_timeline.json"
-  override def update(params: Map[String, String]) = new UserTimelineRequest[C](params, client).asInstanceOf[Self]
-  def withClient(client: Client) = new UserTimelineRequest[WithClient](params, Some(client))
+  //override def update(params: Map[String, String]) = new UserTimelineRequest[C](params, client).asInstanceOf[Self]
+  override def update[D <: HasClient](params: Map[String, String], client: Option[Client] = client) = new UserTimelineRequest[D](params, client).asInstanceOf[Self]
+  //def withClient(client: Client) = new UserTimelineRequest[WithClient](params, Some(client))
 }
 
 object UserTimelineRequest {
   def apply(userId: Long) = new UserTimelineRequest[NoClient](params = Map("id" -> userId.toString))
 }
+*/
 /*
 class UserTimelineRequest(
   userId: UserId,
