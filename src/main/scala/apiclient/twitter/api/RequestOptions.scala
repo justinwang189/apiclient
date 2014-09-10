@@ -12,15 +12,10 @@ trait TimelineRequestOptions[C <: HasClient] extends { self: ApiRequest[C, _] =>
   def withMaxId(id: TweetId) = addParam("max_id", id.toString)
 }
 
-
-/*
-trait TweetRequest[C <: HasClient, M <: Model] extends ApiRequest[C, M] { self: Parser[M] =>
-  type Self <: TweetRequest[C, M]
-  def withTweetId(tweetId: Long): Self = addParam("id", tweetId.toString )
+trait TweetRequestOptions[C <: HasClient] extends { self: ApiRequest[C, _] =>
+  def withTweetId(tweetId: Long) = addParam("id", tweetId.toString )
 }
 
-trait ListRequest[C <: HasClient, M <: Model] extends ApiRequest[C, M] { self: Parser[M] =>
-  type self <: ListRequest[C, M]
-  def withUserId(userId: Long): Self = addParam("id", userId.toString )
+trait ListRequestOptions[C <: HasClient] extends { self: ApiRequest[C, _] =>
+  def withUserId(userId: Long) = addParam("id", userId.toString )
 }
-*/
